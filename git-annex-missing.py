@@ -15,9 +15,9 @@ if __name__ == '__main__':
     hashes = {}
 
     print("Building the list of hashes in the annex_dir")
-    for root, dirs, files in os.walk(annex_dir):
-        if '.git' in root:
-            continue  # exclude .git dir
+    for root, dirs, files in os.walk(annex_dir, topdown=True):
+        if '.git' in dirs:
+            dirs.remove('.git')  # exclude .git dir
 
         for file in sorted(files):
             filename = os.path.join(root, file)
